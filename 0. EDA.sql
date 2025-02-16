@@ -1,8 +1,5 @@
-
-
 use AdventureWorks2022
 go 
-
 --------------
 with summary_data as (
 
@@ -21,7 +18,7 @@ with summary_data as (
     LEFT JOIN Production.Product p ON d.ProductID = p.ProductID
     GROUP BY d.SalesOrderID,h.OrderDate,h.CustomerID
 )	
-
+---
 select 
 	convert(date,min(OrderDate)) as [Date from],  convert(date,max(OrderDate)) as [Date to], -- date range
 	format(COUNT(distinct(SalesOrderID)),'N0') as [Number of orders], --number of orders
@@ -33,10 +30,3 @@ select
 		format((sum(TaxAmt) + sum(Freight)),'n0') as Fee,
 	format((sum(Revenue) - sum(Cost) - sum(TaxAmt) - sum(Freight)), 'n0') as [Net Profit]-- Net Profit (Final Profit after Tax & Freight)
 from summary_data
-
-
-
-
-
-
-
